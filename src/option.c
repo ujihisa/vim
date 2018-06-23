@@ -4648,13 +4648,13 @@ do_set(
 		    {
 			/* Mention where the option was last set. */
 			if (varp == options[opt_idx].var)
-			    last_set_msg(options[opt_idx].scriptID);
+			    last_set_msg(options[opt_idx].scriptID, options[opt_idx].scriptLinenr);
 			else if ((int)options[opt_idx].indir & PV_WIN)
 			    last_set_msg(curwin->w_p_scriptID[
-				      (int)options[opt_idx].indir & PV_MASK]);
+				      (int)options[opt_idx].indir & PV_MASK], options[opt_idx].scriptLinenr);
 			else if ((int)options[opt_idx].indir & PV_BUF)
 			    last_set_msg(curbuf->b_p_scriptID[
-				      (int)options[opt_idx].indir & PV_MASK]);
+				      (int)options[opt_idx].indir & PV_MASK], options[opt_idx].scriptLinenr);
 		    }
 #endif
 		}
@@ -8106,7 +8106,10 @@ set_option_scriptID_idx(int opt_idx, int opt_flags, int id)
     /* Remember where the option was set.  For local options need to do that
      * in the buffer or window structure. */
     if (both || (opt_flags & OPT_GLOBAL) || (indir & (PV_BUF|PV_WIN)) == 0)
+    {
 	options[opt_idx].scriptID = id;
+	options[opt_idx].scriptLinenr = sourcing_lnum;
+    }
     if (both || (opt_flags & OPT_LOCAL))
     {
 	if (indir & PV_BUF)

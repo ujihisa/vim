@@ -8745,7 +8745,7 @@ store_session_globals(FILE *fd)
  * Should only be invoked when 'verbose' is non-zero.
  */
     void
-last_set_msg(scid_T scriptID)
+last_set_msg(scid_T scriptID, linenr_T scriptLinenr)
 {
     char_u *p;
 
@@ -8758,6 +8758,13 @@ last_set_msg(scid_T scriptID)
 	    MSG_PUTS(_("\n\tLast set from "));
 	    MSG_PUTS(p);
 	    vim_free(p);
+	    if (scriptLinenr > 0)
+	    {
+		p = malloc(1024 * sizeof(char));
+		sprintf(p, ":%d", scriptLinenr);
+		MSG_PUTS(p);
+		vim_free(p);
+	    }
 	    verbose_leave();
 	}
     }

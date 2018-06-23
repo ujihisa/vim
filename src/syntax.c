@@ -9261,7 +9261,7 @@ highlight_list_one(int id)
 	highlight_list_arg(id, didh, LIST_STRING, 0, (char_u *)"cleared", "");
 #ifdef FEAT_EVAL
     if (p_verbose > 0)
-	last_set_msg(sgp->sg_scriptID);
+	last_set_msg(sgp->sg_scriptID, 0);
 #endif
 }
 

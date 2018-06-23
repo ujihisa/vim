@@ -4081,7 +4081,7 @@ showmap(
     }
 #ifdef FEAT_EVAL
     if (p_verbose > 0)
-	last_set_msg(mp->m_script_ID);
+	last_set_msg(mp->m_script_ID, 0);
 #endif
     out_flush();			/* show one line at a time */
 }

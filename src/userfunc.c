@@ -1549,7 +1549,7 @@ list_func_head(ufunc_T *fp, int indent)
 	MSG_PUTS(" closure");
     msg_clr_eos();
     if (p_verbose > 0)
-	last_set_msg(fp->uf_script_ID);
+	last_set_msg(fp->uf_script_ID, 0);
 }
 
 /*
